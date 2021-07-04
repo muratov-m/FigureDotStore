@@ -34,7 +34,7 @@ namespace Figures.Core.Logic
                 {
                     if (!_figuresStorage.CheckIfAvailable(position.Key, position.Value))
                     {
-                        throw new InvalidOperationException("Not Available");
+                        throw new InvalidOperationException($"Not available count for position: {position.Key}");
                     }
                 }
 

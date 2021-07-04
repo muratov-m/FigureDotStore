@@ -10,7 +10,7 @@ namespace Figures.Core.Domain
 
             if (SideA < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(side), "Square restrictions not met");
+                throw new ArgumentOutOfRangeException(nameof(SideA), "Square restrictions not met");
             }
         }
 

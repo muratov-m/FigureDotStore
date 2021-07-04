@@ -51,12 +51,12 @@ namespace Figures.Web.Controllers
             catch (ArgumentException e)
             {
                 _logger.LogError(e, "Request to create an order is incorrect.");
-                return BadRequest();
+                return BadRequest(e.Message);
             }
             catch (Exception e)
             {
                 _logger.LogError(e, "Unexpected error occurred while creating the order.");
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
     }

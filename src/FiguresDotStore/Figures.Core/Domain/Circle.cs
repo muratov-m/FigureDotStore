@@ -10,7 +10,7 @@ namespace Figures.Core.Domain
 
             if (SideA < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(side), "Circle restrictions not met");
+                throw new ArgumentOutOfRangeException(nameof(SideA), "Circle restrictions not met");
             }
         }
 

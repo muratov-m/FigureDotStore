@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Figures.Web</name>
+    </assembly>
+    <members>
+        <member name="M:Figures.Web.Controllers.FiguresController.Order(Figures.Web.Models.Cart)">
+            <summary>
+            Оформить заказ.
+            </summary>
+            <param name="cart">Корзина.</param>
+            <returns>Стоимость заказа.</returns>
+        </member>
+    </members>
+</doc>

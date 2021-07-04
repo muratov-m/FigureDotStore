@@ -23,7 +23,11 @@ namespace Figures.Web.Controllers
             _orderService = orderService;
         }
 
-        // хотим оформить заказ и получить в ответе его стоимость
+        /// <summary>
+        /// Оформить заказ.
+        /// </summary>
+        /// <param name="cart">Корзина.</param>
+        /// <returns>Стоимость заказа.</returns>
         [HttpPost]
         [Route(nameof(Order))]
         public async Task<ActionResult> Order(Cart cart)
@@ -33,9 +37,10 @@ namespace Figures.Web.Controllers
                 var order = new Order
                 {
                     Positions = cart.Positions
-                        .Select(p => new OrderPosition(
-                            FiguresFactory.Create(p.Type, p.SideA, p.SideB, p.SideC),
-                            p.Count))
+                        .Select(x =>
+                            new OrderPosition(
+                                FiguresFactory.Create(x.Type, x.SideA, x.SideB, x.SideC),
+                                x.Count))
                         .ToList()
                 };
 

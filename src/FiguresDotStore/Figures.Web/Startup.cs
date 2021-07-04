@@ -37,6 +37,7 @@ namespace Figures.Web
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Figures.Web", Version = "v1" });
+                c.IncludeXmlComments("Figures.Web.xml");
             });
         }
 

@@ -1,5 +1,5 @@
 ﻿using Figures.Data.Redis;
-using Figures.Data.Storages;
+using Figures.Data.Storage;
 using Moq;
 using NUnit.Framework;
 

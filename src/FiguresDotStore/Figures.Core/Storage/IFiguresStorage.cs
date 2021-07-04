@@ -1,4 +1,4 @@
-﻿namespace Figures.Core.Storages
+﻿namespace Figures.Core.Storage
 {
     internal interface IFiguresStorage
     {

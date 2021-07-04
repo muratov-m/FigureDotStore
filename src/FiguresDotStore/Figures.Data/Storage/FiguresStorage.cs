@@ -1,7 +1,7 @@
-﻿using Figures.Core.Storages;
+﻿using Figures.Core.Storage;
 using Figures.Data.Redis;
 
-namespace Figures.Data.Storages
+namespace Figures.Data.Storage
 {
     internal class FiguresStorage : IFiguresStorage
     {

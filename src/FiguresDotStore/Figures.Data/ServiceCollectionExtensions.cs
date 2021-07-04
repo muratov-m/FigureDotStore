@@ -1,6 +1,6 @@
-﻿using Figures.Core.Storages;
+﻿using Figures.Core.Storage;
 using Figures.Data.Redis;
-using Figures.Data.Storages;
+using Figures.Data.Storage;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Figures.Data

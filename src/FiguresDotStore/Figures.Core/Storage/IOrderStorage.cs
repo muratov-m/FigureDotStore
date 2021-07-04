@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Figures.Core.Domain;
 
 [assembly: InternalsVisibleTo("Figures.Data")]
-namespace Figures.Core.Storages
+namespace Figures.Core.Storage
 {
     internal interface IOrderStorage
     {

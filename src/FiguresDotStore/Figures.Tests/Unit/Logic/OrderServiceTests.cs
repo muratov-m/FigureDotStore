@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Figures.Core.Domain;
 using Figures.Core.Logic;
-using Figures.Core.Storages;
+using Figures.Core.Storage;
 using Moq;
 using NUnit.Framework;
 

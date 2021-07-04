@@ -37,13 +37,13 @@ namespace Figures.Tests.Unit.Logic
             var orderService = new OrderService(figuresStorageMock.Object, orderStorageMock.Object);
 
             // Act
-            await orderService.MakeOrder(order);
+            await orderService.MakeOrderAsync(order);
 
             // Assert
             figuresStorageMock.Verify(x => x.CheckIfAvailable(FigureType.Circle.ToString(), 1));
             figuresStorageMock.Verify(x => x.Reserve(FigureType.Circle.ToString(), 1));
             figuresStorageMock.Verify(x => x.UndoReserve(FigureType.Circle.ToString(), 1), Times.Never);
-            orderStorageMock.Verify(x => x.Save(order));
+            orderStorageMock.Verify(x => x.SaveAsync(order));
         }
 
         [Test(Description = "При резервировании позиций происходит группировка по типу фигур (чтобы уменьшить кол-во обращений к хранилищу)")]
@@ -87,7 +87,7 @@ namespace Figures.Tests.Unit.Logic
             var orderService = new OrderService(figuresStorageMock.Object, orderStorageMock.Object);
 
             // Act
-            await orderService.MakeOrder(order);
+            await orderService.MakeOrderAsync(order);
 
             // Assert
             figuresStorageMock.Verify(x => x.Reserve(FigureType.Circle.ToString(), 3));
@@ -120,7 +120,7 @@ namespace Figures.Tests.Unit.Logic
             var orderService = new OrderService(figuresStorageMock.Object, orderStorageMock.Object);
 
             // Act, Assert
-            Assert.ThrowsAsync<InvalidOperationException>(() => orderService.MakeOrder(order));
+            Assert.ThrowsAsync<InvalidOperationException>(() => orderService.MakeOrderAsync(order));
         }
 
         [Test(Description = "При возникновении ошибки при сохранении заказа происходит отмена резерва позиций заказа")]
@@ -149,13 +149,13 @@ namespace Figures.Tests.Unit.Logic
 
             var orderStorageMock = new Mock<IOrderStorage>();
             orderStorageMock
-                .Setup(x => x.Save(order))
+                .Setup(x => x.SaveAsync(order))
                 .Throws<Exception>();
 
             var orderService = new OrderService(figuresStorageMock.Object, orderStorageMock.Object);
 
             // Act
-            Assert.ThrowsAsync<Exception>(() => orderService.MakeOrder(order));
+            Assert.ThrowsAsync<Exception>(() => orderService.MakeOrderAsync(order));
 
             // Assert
             figuresStorageMock.Verify(x => x.UndoReserve(FigureType.Circle.ToString(), 5));

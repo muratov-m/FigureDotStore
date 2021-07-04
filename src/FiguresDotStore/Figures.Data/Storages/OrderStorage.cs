@@ -9,7 +9,7 @@ namespace Figures.Data.Storages
 {
     internal class OrderStorage : IOrderStorage
     {
-        public async Task<decimal> Save(Order order)
+        public async Task<decimal> SaveAsync(Order order)
         {
             // Имитируем задержку при сохранении заказа
             await Task.Delay(1000);

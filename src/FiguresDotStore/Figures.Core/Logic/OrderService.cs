@@ -22,7 +22,7 @@ namespace Figures.Core.Logic
             _orderStorage = orderStorage;
         }
 
-        public async Task<decimal> MakeOrder(Order order)
+        public async Task<decimal> MakeOrderAsync(Order order)
         {
             var groupedPositions = order.Positions
                 .GroupBy(x => x.Figure.Type)
@@ -46,7 +46,7 @@ namespace Figures.Core.Logic
 
             try
             {
-                return await _orderStorage.Save(order);
+                return await _orderStorage.SaveAsync(order);
             }
             catch
             {

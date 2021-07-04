@@ -44,7 +44,7 @@ namespace Figures.Web.Controllers
                         .ToList()
                 };
 
-                var result = await _orderService.MakeOrder(order);
+                var result = await _orderService.MakeOrderAsync(order);
 
                 return new OkObjectResult(result);
             }

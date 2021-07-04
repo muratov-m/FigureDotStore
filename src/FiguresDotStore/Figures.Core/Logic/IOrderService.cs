@@ -5,6 +5,6 @@ namespace Figures.Core.Logic
 {
     public interface IOrderService
     {
-        public Task<decimal> MakeOrder(Order order);
+        public Task<decimal> MakeOrderAsync(Order order);
     }
 }

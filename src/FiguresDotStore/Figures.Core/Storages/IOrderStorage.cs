@@ -8,6 +8,6 @@ namespace Figures.Core.Storages
     internal interface IOrderStorage
     {
         // сохраняет оформленный заказ и возвращает сумму
-        Task<decimal> Save(Order order);
+        Task<decimal> SaveAsync(Order order);
     }
 }

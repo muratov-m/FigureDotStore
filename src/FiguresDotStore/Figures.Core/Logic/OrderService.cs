@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -28,21 +29,7 @@ namespace Figures.Core.Logic
                 .GroupBy(x => x.Figure.Type)
                 .ToDictionary(x => x.Key.ToString(), x => x.Sum(position => position.Count));
 
-            lock (FiguresStorageLocker)
-            {
-                foreach (var position in groupedPositions)
-                {
-                    if (!_figuresStorage.CheckIfAvailable(position.Key, position.Value))
-                    {
-                        throw new InvalidOperationException($"Not available count for position: {position.Key}");
-                    }
-                }
-
-                foreach (var position in groupedPositions)
-                {
-                    _figuresStorage.Reserve(position.Key, position.Value);
-                }
-            }
+            ReservePositions(groupedPositions);
 
             try
             {
@@ -50,12 +37,38 @@ namespace Figures.Core.Logic
             }
             catch
             {
-                foreach (var position in groupedPositions)
+                UndoReservePositions(groupedPositions);
+                throw;
+            }
+        }
+
+        private void ReservePositions(Dictionary<string, int> groupedPositions)
+        {
+            lock (FiguresStorageLocker)
+            {
+                foreach (var (type, count) in groupedPositions)
                 {
-                    _figuresStorage.UndoReserve(position.Key, position.Value);
+                    if (!_figuresStorage.CheckIfAvailable(type, count))
+                    {
+                        throw new InvalidOperationException($"Not available count for position: {type}");
+                    }
                 }
 
-                throw;
+                foreach (var (type, count) in groupedPositions)
+                {
+                    _figuresStorage.Reserve(type, count);
+                }
+            }
+        }
+
+        private void UndoReservePositions(Dictionary<string, int> groupedPositions)
+        {
+            lock (FiguresStorageLocker)
+            {
+                foreach (var (type, count) in groupedPositions)
+                {
+                    _figuresStorage.UndoReserve(type, count);
+                }
             }
         }
     }
